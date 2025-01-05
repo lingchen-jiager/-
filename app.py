@@ -197,32 +197,14 @@ def handle_ice_candidate(data):
 
 if __name__ == '__main__':
     # 使用 eventlet 运行带有 SSL 的服务器
-    import socket
 
-    HOST = '192.168.69.52'
-    PORT = 8001
-
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(('8.8.8.8', 80))
-        local_ip = s.getsockname()[0]
-        print(f"本地 IP 地址: {local_ip}")
-    finally:
-        s.close()
-
-    if local_ip:
-        print("***"*20 + f"\n请在浏览器地址栏输入：http://{local_ip}:8384\n"+"***"*20)
-        pass
-    else:
-        local_ip="0.0.0.0"
     eventlet.wsgi.server(
-        # eventlet.wrap_ssl(
-        #     eventlet.listen(('0.0.0.0', 8384)),
-        #     certfile=SSL_CERT_PATH,
-        #     keyfile=SSL_KEY_PATH,
-        #     server_side=True
-        # ),
-        eventlet.listen((local_ip, 8384)), #局域网内部署无需ssl，将201到206行注释掉即可。假设外网部署，则将本行注释掉，201-206取消注释，在文件开始15-16行配置你的证书路径。
+         eventlet.wrap_ssl(
+             eventlet.listen(('0.0.0.0', 8384)),
+            certfile=SSL_CERT_PATH,
+            keyfile=SSL_KEY_PATH,
+             server_side=True
+         ),
         app,
         debug=True
     )
