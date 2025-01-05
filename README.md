@@ -17,6 +17,7 @@
 详细说明：
 
 ## 文件结构：
+```txt
 项目根目录/
 ├── app.py                 # Flask主应用文件
 ├── devices.json           # 设备信息存储文件
@@ -25,7 +26,8 @@
 ├── static/               # 静态文件目录
 │   ├── css/             # CSS文件
 │   └── js/              # JavaScript文件
-|── ── ── 
+|── ── ──
+```
 ## 使用
 ```cmd
 python app.py
