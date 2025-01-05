@@ -156,7 +156,7 @@ def update_device_list():
                 'sid': dev_sid
             }
             for dev_sid, dev in connected_devices.items()
-             if is_same_network(current_ip, dev['ip']) #如果局域网内部署将此句注销。若外网部署，取消注销，否则会导致显示所有在线设备，而不再区分是否在一个局域网内。
+             if is_same_network(current_ip, dev['ip']) 
         ]
         
         # 向当前设备发送过滤后的设备列表
@@ -222,7 +222,7 @@ if __name__ == '__main__':
         #     keyfile=SSL_KEY_PATH,
         #     server_side=True
         # ),
-        eventlet.listen((local_ip, 8384)), #局域网内部署无需ssl，将201到206行注释掉杰克。假设外网部署，则将本行注释掉，201-206取消注释，在文件开始配置你的证书路径，再将159行取消注释。
+        eventlet.listen((local_ip, 8384)), #局域网内部署无需ssl，将201到206行注释掉即可。假设外网部署，则将本行注释掉，201-206取消注释，在文件开始15-16行配置你的证书路径。
         app,
         debug=True
     )
